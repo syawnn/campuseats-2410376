@@ -6,6 +6,15 @@ function MenuItemCard({ item, onAdd }) {
       </div>
 
       <p className="tag">{item.category}</p>
+
+      <div>
+        {(item.tags ?? []).map((tag) => (
+        <span key={tag} className="tag">
+          {tag}
+        </span>
+        ))}
+      </div>
+
       <h3>{item.name}</h3>
       <p className="muted">{item.description}</p>
       <p className="price">RM {item.price.toFixed(2)}</p>

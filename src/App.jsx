@@ -196,7 +196,7 @@ function handlePlaceOrder(details) {
               {tag}{' '}
             </label>
           ))}
-        </div>
+          </div>
 
           <MenuList
             items={filteredMenu}
