@@ -20,3 +20,10 @@ Add a new section every week, before you tag. Did not use AI? Write "None" under
 - What I asked for: Step-by-step help with fetching vendor data, cart quantities, totals, checkout validation, dietary filters and combining classmates’ menu data.
 - What I kept or changed: I used the lab structure and completed its TODO sections. I kept Vegetarian and Dairy-free checkboxes for my personal feature and credited the classmates who shared their vendor data.
 - One thing the AI got wrong: The AI suggested displaying all vendor tags as checkboxes, including Spicy and Sweet. I changed this to show only Vegetarian and Dairy-free to keep the feature focused on dietary filters.
+
+
+## Week 4
+- Tool(s): ChatGPT
+- What I asked for: Step-by-step help with custom hooks, cart context, React Router and dietary filters in the URL. I also asked for explanations of the code and where to place it.
+- What I kept or changed: I followed the lab requirements, extracted useLocalStorage and useVendors, shared cart data through context, created routed pages and saved selected dietary tags in the URL.
+- One thing the AI got wrong: The AI gave an example using useCart() without clearly explaining where it should go. I asked for clarification before adding it to my code.
