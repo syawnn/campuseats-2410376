@@ -9,8 +9,6 @@ export function useVendors() {
   useEffect(() => {
     const controller = new AbortController()
 
-    setLoading(true)
-    setError(null)
 
     fetch('/api/vendors.json', { signal: controller.signal })
       .then((res) => {
@@ -36,8 +34,10 @@ export function useVendors() {
   }, [reloadKey])
 
   function reload() {
-    setReloadKey((key) => key + 1)
-  }
+  setLoading(true)
+  setError(null)
+  setReloadKey((key) => key + 1)
+}
 
   return { vendors, loading, error, reload }
 }

@@ -24,6 +24,6 @@ Add a new section every week, before you tag. Did not use AI? Write "None" under
 
 ## Week 4
 - Tool(s): ChatGPT
-- What I asked for: Step-by-step help with custom hooks, cart context, React Router and dietary filters in the URL. I also asked for explanations of the code and where to place it.
+- What I asked for: Step-by-step help with custom hooks, cart context, React Router and dietary filters in the URL. I also asked for explanations of the code and where to place it.g
 - What I kept or changed: I followed the lab requirements, extracted useLocalStorage and useVendors, shared cart data through context, created routed pages and saved selected dietary tags in the URL.
 - One thing the AI got wrong: The AI gave an example using useCart() without clearly explaining where it should go. I asked for clarification before adding it to my code.

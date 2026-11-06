@@ -188,3 +188,60 @@ start; }
 .form input, .form select { padding: 0.5rem; border: 1px solid #c5cbd3; borderradius: 8px; font: inherit; }
 .field-error { color: #b3261e; font-size: 0.85rem; margin: 0; }
 .error { border-left: 4px solid #b3261e; }
+
+
+
+.dietary-filters {
+  width: 100%;
+  max-width: 360px;
+  min-width: 0;
+  margin: 0 0 24px;
+  padding: 0;
+  border: 0;
+}
+
+.dietary-filters legend {
+  margin-bottom: 10px;
+  padding: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.dietary-filter-card {
+  padding: 0 16px;
+  background: #fff;
+  border: 1px solid #e2e2e8;
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 6%);
+}
+
+.dietary-filter-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.dietary-filter-row + .dietary-filter-row {
+  border-top: 1px solid #e2e2e8;
+}
+
+.dietary-filter-row input {
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  margin: 1px 0 0;
+  accent-color: #6463f5;
+  cursor: pointer;
+}
+
+.dietary-filter-row strong,
+.dietary-filter-row small {
+  display: block;
+}
+
+.dietary-filter-row small {
+  margin-top: 3px;
+  color: #5f6570;
+}

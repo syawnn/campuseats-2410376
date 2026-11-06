@@ -2,6 +2,7 @@ import { useParams, useSearchParams } from 'react-router'
 import { useVendors } from '../hooks/useVendors.js'
 import MenuList from '../components/MenuList.jsx'
 import { Loading, ErrorMessage } from '../components/Status.jsx'
+import DietaryFilters from '../components/DietaryFilters.jsx'
 
 function VendorPage() {
   const { id } = useParams()
@@ -43,27 +44,17 @@ function VendorPage() {
   )
 
   return (
-    <section>
-      <h2 className="section-title">Menu: {vendor.name}</h2>
+  <section>
+    <h2 className="section-title">Menu: {vendor.name}</h2>
 
-      <div>
-        <p>Dietary filters:</p>
+    <DietaryFilters
+      selectedTags={selectedTags}
+      onTagChange={handleTagChange}
+    />
 
-        {['Vegetarian', 'Dairy-free'].map((tag) => (
-          <label key={tag}>
-            <input
-              type="checkbox"
-              checked={selectedTags.includes(tag)}
-              onChange={() => handleTagChange(tag)}
-            />
-            {tag}{' '}
-          </label>
-        ))}
-      </div>
-
-      <MenuList items={filteredMenu} />
-    </section>
-  )
+    <MenuList items={filteredMenu} />
+  </section>
+)
 }
 
 export default VendorPage
