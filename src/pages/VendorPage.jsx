@@ -1,5 +1,5 @@
 import { useParams, useSearchParams } from 'react-router'
-import { useVendors } from '../hooks/useVendors.js'
+import { useVendor } from '../hooks/useVendor.js'
 import MenuList from '../components/MenuList.jsx'
 import { Loading, ErrorMessage } from '../components/Status.jsx'
 import DietaryFilters from '../components/DietaryFilters.jsx'
@@ -9,9 +9,10 @@ import { useAuth } from '../hooks/useAuth.js'
 
 function VendorPage() {
   const { id } = useParams()
-  const { vendors, loading, error, reload } = useVendors()
   const [searchParams, setSearchParams] = useSearchParams()
   const selectedTags = searchParams.getAll('tag')
+
+  const { vendor, menu, loading, error } = useVendor(id, selectedTags)
 
   const { user, loading: authLoading } = useAuth()
 const restoredFor = useRef(null)
@@ -55,7 +56,7 @@ useEffect(() => {
   }
 }, [authLoading, user, searchParams, setSearchParams])
 
-  const vendor = vendors.find((vendor) => vendor.id === id)
+  
 
   function handleTagChange(tag) {
     const nextTags = selectedTags.includes(tag)
@@ -88,16 +89,25 @@ useEffect(() => {
   }
 
   if (error) {
-    return <ErrorMessage message={error} onRetry={reload} />
-  }
+  return (
+    <ErrorMessage
+      message={error}
+      onRetry={() => window.location.reload()}
+    />
+  )
+}
 
   if (!vendor) {
     return <p className="muted">Vendor not found.</p>
   }
 
-  const filteredMenu = vendor.menu.filter((item) =>
-    selectedTags.every((tag) => (item.tags ?? []).includes(tag))
-  )
+  const filteredMenu = menu.map((item) => ({
+  ...item,
+  vendorName: vendor.name,
+}))
+   .filter((item) =>
+     selectedTags.every((tag) => (item.tags ?? []).includes(tag))
+   )
 
   return (
   <section>
