@@ -1,39 +1,96 @@
-import { useCart } from '../hooks/useCart.js'
+import { useMyOrders } from '../hooks/useMyOrders.js'
+import { Loading, ErrorMessage } from '../components/Status.jsx'
+import OrderActions from '../components/OrderActions.jsx'
+
+const STATUSES = ['Received', 'Preparing', 'Ready', 'Collected']
 
 function OrdersPage() {
-  const { orders } = useCart()
+  const { orders, loading, error } = useMyOrders()
 
-  if (orders.length === 0) {
-    return <p className="muted">No orders yet.</p>
+  if (loading) return <Loading />
+
+  if (error) {
+    return (
+      <ErrorMessage
+        message={error}
+        onRetry={() => window.location.reload()}
+      />
+    )
   }
 
   return (
-    <section>
-      <h2 className="section-title">Your orders</h2>
+    <section className="orders-page">
+      <h2 className="orders-heading">My orders</h2>
+      <p className="orders-subtitle">
+        Status updates appear here live.
+      </p>
 
-      {orders.map((order) => (
-        <div key={order.id} className="card">
-          <h3>Order placed</h3>
+      {orders.length === 0 && (
+        <p className="muted">No orders yet.</p>
+      )}
 
-          <p>Name: {order.name}</p>
-          <p>Mahallah: {order.mahallah}</p>
-          <p>Pickup time: {order.pickupTime}</p>
+      <div className="orders-list">
+        {orders.map((order) => {
+          const currentStep = STATUSES.indexOf(order.status)
 
-          <ul>
-            {order.items.map((line) => (
-              <li key={line.item.id}>
-                {line.item.name} × {line.qty}
-                {' — '}
-                RM {(line.item.price * line.qty).toFixed(2)}
-              </li>
-            ))}
-          </ul>
+          return (
+            <article key={order.id} className="order-card">
+              <h3 className="order-heading">
+                {order.vendorName} · pickup {order.pickupTime}
+              </h3>
 
-          <p className="cart-total">
-            Total: RM {order.total.toFixed(2)}
-          </p>
-        </div>
-      ))}
+              <ul className="order-items">
+                {order.items.map((item) => (
+                  <li key={item.itemId}>
+                    {item.qty}× {item.name}
+                  </li>
+                ))}
+              </ul>
+
+              <p className="order-date">
+                Placed{' '}
+                {order.createdAt
+                  ? order.createdAt.toDate().toLocaleString('en-MY', {
+                      day: 'numeric',
+                      month: 'short',
+                      year: 'numeric',
+                      hour: 'numeric',
+                      minute: '2-digit',
+                      hour12: true,
+                    })
+                  : 'just now'}
+              </p>
+
+              <p className="order-total">
+                RM {order.total.toFixed(2)}
+              </p>
+
+              <ol
+                className="order-status-track"
+                aria-label={`Order status: ${order.status}`}
+              >
+                {STATUSES.map((status, index) => (
+                  <li
+                    key={status}
+                    className={`order-status-badge ${
+                      index <= currentStep ? 'is-reached' : ''
+                    }`}
+                    aria-current={
+                      status === order.status ? 'step' : undefined
+                    }
+                  >
+                    {status}
+                  </li>
+                ))}
+              </ol>
+
+              {order.status === 'Received' && (
+                <OrderActions order={order} />
+              )}
+            </article>
+          )
+        })}
+      </div>
     </section>
   )
 }

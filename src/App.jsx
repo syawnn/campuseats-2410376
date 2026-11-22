@@ -9,6 +9,7 @@ import OrdersPage from './pages/OrdersPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import RegisterPage from './pages/RegisterPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
+import SeedPage from './pages/SeedPage.jsx'
 
 function App() {
   return (
@@ -20,6 +21,11 @@ function App() {
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
 
+          {import.meta.env.DEV && (
+            <Route path="seed" element={<SeedPage />} />
+          )}
+
+          
           <Route element={<ProtectedRoute />}>
             <Route path="cart" element={<CartPage />} />
             <Route path="orders" element={<OrdersPage />} />

@@ -44,3 +44,22 @@ Add a new section every week, before you tag. Did not use AI? Write "None" under
   needed further adjustment because the Log out button became
   difficult to see. I corrected its text colour and removed
   the border and background.
+
+
+
+## Week 6
+
+- Tool used: ChatGPT.
+- What I asked: I asked for step-by-step help connecting Firestore,
+  seeding vendors and menus, saving orders, adding live listeners,
+  changing pickup times, cancelling orders, and implementing the
+  dietary filter query. I also asked for code explanations, testing
+  steps and improvements to the Orders page design.
+- What I kept or changed: I used the suggested services and hooks,
+  adapted my existing pages and kept my dietary filters. I also added
+  compact order cards, status badges and better spacing for the order
+  action controls.
+- One thing the AI got wrong: The AI initially kept filtering items
+  in React using every(), which required all selected tags to match.
+  The Week 6 task required a Firestore array-contains-any query.
+  This was corrected so items matching any selected tag are returned.

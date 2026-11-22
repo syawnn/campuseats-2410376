@@ -1,7 +1,10 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import CartItem from '../components/CartItem.jsx'
 import CheckoutForm from '../components/CheckoutForm.jsx'
 import { useCart } from '../hooks/useCart.js'
+import { useAuth } from '../hooks/useAuth.js'
+import { placeOrders } from '../services/orders.js'
 
 function CartPage() {
   const {
@@ -9,14 +12,23 @@ function CartPage() {
     total,
     changeQty,
     removeFromCart,
-    placeOrder,
+    clearCart,
   } = useCart()
 
+  const { user } = useAuth()
+  const [error, setError] = useState('')
   const navigate = useNavigate()
 
-  function handlePlaceOrder(details) {
-    placeOrder(details)
-    navigate('/orders')
+  async function handlePlaceOrder(details) {
+    setError('')
+
+    try {
+      await placeOrders(user, cart, details)
+      clearCart()
+      navigate('/orders')
+    } catch (err) {
+      setError(`Could not place the order: ${err.message}`)
+    }
   }
 
   if (cart.length === 0) {
@@ -46,7 +58,14 @@ function CartPage() {
         </p>
       </div>
 
-      <CheckoutForm onPlaceOrder={handlePlaceOrder} />
+      <div>
+        {error && <p role="alert">{error}</p>}
+
+        <CheckoutForm
+          onPlaceOrder={handlePlaceOrder}
+          defaultName={user?.displayName ?? ''}
+        />
+      </div>
     </div>
   )
 }

@@ -3,7 +3,7 @@ import { useLocalStorage } from '../hooks/useLocalStorage.js'
 
 function CartProvider({ children }) {
   const [cart, setCart] = useLocalStorage('campuseats-cart', [])
-  const [orders, setOrders] = useLocalStorage('campuseats-orders', [])
+  
 
   const count = cart.reduce(
     (sum, line) => sum + line.qty,
@@ -51,17 +51,7 @@ function CartProvider({ children }) {
     )
   }
 
-  function placeOrder(details) {
-    const order = {
-      ...details,
-      id: crypto.randomUUID(),
-      items: cart,
-      total,
-    }
-
-    setOrders((prevOrders) => [...prevOrders, order])
-    setCart([])
-  }
+ 
 
   function clearCart() {
   setCart([])
@@ -71,13 +61,11 @@ function CartProvider({ children }) {
     <CartContext.Provider
       value={{
         cart,
-        orders,
         count,
         total,
         addToCart,
         changeQty,
         removeFromCart,
-        placeOrder,
         clearCart,
       }}
     >

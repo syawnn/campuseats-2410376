@@ -274,3 +274,174 @@ start; }
   font: inherit;
   cursor: pointer;
 }
+
+
+
+
+.orders-page {
+  width: 100%;
+  max-width: 960px;
+  margin: 24px auto 0;
+  color: #172333;
+}
+
+.orders-heading {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.orders-subtitle {
+  margin: 0 0 16px;
+  color: #647184;
+  font-size: 14px;
+}
+
+.orders-list {
+  display: grid;
+  gap: 12px;
+}
+
+.order-card {
+  min-width: 0;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #e7e9ed;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 3%);
+}
+
+.order-heading {
+  margin: 0 0 3px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.order-items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: #647184;
+  font-size: 13px;
+}
+
+.order-date {
+  margin: 3px 0 6px;
+  color: #647184;
+  font-size: 13px;
+}
+
+.order-total {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 750;
+}
+
+.order-status-track {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.order-status-badge {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #eef0f4;
+  color: #536174;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.order-status-badge.is-reached {
+  background: #006c63;
+  color: #fff;
+}
+
+.order-card > div {
+  margin-top: 12px;
+}
+
+@media (max-width: 480px) {
+  .order-card {
+    padding: 14px;
+  }
+
+  .order-heading {
+    font-size: 15px;
+  }
+
+  .order-status-badge {
+    padding: 3px 8px;
+    font-size: 11px;
+  }
+}
+
+
+
+
+
+.order-actions {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #edf0f3;
+}
+
+.order-actions form {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.order-actions label {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.order-actions input[type="time"] {
+  width: auto;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid #ccd3da;
+  border-radius: 8px;
+  background: #fff;
+  color: #172333;
+  font: inherit;
+}
+
+.order-actions button {
+  width: auto;
+  margin: 0;
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.order-actions form button {
+  border: 1px solid #006c63;
+  background: #006c63;
+  color: #fff;
+}
+
+.order-actions > button {
+  margin-top: 14px;
+  border: 1px solid #e5baba;
+  background: #fff;
+  color: #b42318;
+}
+
+.order-actions > button:hover {
+  background: #fff1f0;
+}
+
+.order-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
