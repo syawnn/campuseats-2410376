@@ -27,3 +27,20 @@ Add a new section every week, before you tag. Did not use AI? Write "None" under
 - What I asked for: Step-by-step help with custom hooks, cart context, React Router and dietary filters in the URL. I also asked for explanations of the code and where to place it.g
 - What I kept or changed: I followed the lab requirements, extracted useLocalStorage and useVendors, shared cart data through context, created routed pages and saved selected dietary tags in the URL.
 - One thing the AI got wrong: The AI gave an example using useCart() without clearly explaining where it should go. I asked for clarification before adding it to my code.
+
+
+## Week 5 – Firebase Authentication
+
+- Tool used: ChatGPT.
+- What I asked: Guidance on Firebase setup, authentication,
+  protected routes, header styling, and saving dietary preferences.
+  I also asked for explanations of the code.
+- What I kept or changed: I added AuthContext, useAuth,
+  AuthProvider, login and registration pages, friendly error
+  messages, and protected cart and orders routes. I added a
+  clearCart function and saved dietary preferences per user.
+  I adjusted the header CSS to match my preferred design.
+- One thing the AI got wrong: The suggested header styling
+  needed further adjustment because the Log out button became
+  difficult to see. I corrected its text colour and removed
+  the border and background.

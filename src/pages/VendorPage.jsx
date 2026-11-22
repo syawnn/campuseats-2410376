@@ -3,12 +3,57 @@ import { useVendors } from '../hooks/useVendors.js'
 import MenuList from '../components/MenuList.jsx'
 import { Loading, ErrorMessage } from '../components/Status.jsx'
 import DietaryFilters from '../components/DietaryFilters.jsx'
+import { useEffect, useRef } from 'react'
+import { useAuth } from '../hooks/useAuth.js'
+
 
 function VendorPage() {
   const { id } = useParams()
   const { vendors, loading, error, reload } = useVendors()
   const [searchParams, setSearchParams] = useSearchParams()
   const selectedTags = searchParams.getAll('tag')
+
+  const { user, loading: authLoading } = useAuth()
+const restoredFor = useRef(null)
+
+useEffect(() => {
+  if (authLoading) return
+
+  const identity = user?.uid ?? 'guest'
+
+  if (restoredFor.current === identity) return
+  restoredFor.current = identity
+
+  // Guests do not load saved preferences.
+  if (!user) return
+
+  // Keep filters from a shared URL when present.
+  if (searchParams.has('tag')) return
+
+  try {
+    const savedTags = JSON.parse(
+      localStorage.getItem(`ce-diet-${user.uid}`) ?? '[]'
+    )
+
+    if (
+      !Array.isArray(savedTags) ||
+      !savedTags.every((tag) => typeof tag === 'string') ||
+      savedTags.length === 0
+    ) {
+      return
+    }
+
+    const nextParams = new URLSearchParams(searchParams)
+
+    savedTags.forEach((tag) => {
+      nextParams.append('tag', tag)
+    })
+
+    setSearchParams(nextParams, { replace: true })
+  } catch {
+    // Leave the filters usable if saved data cannot be read.
+  }
+}, [authLoading, user, searchParams, setSearchParams])
 
   const vendor = vendors.find((vendor) => vendor.id === id)
 
@@ -25,6 +70,17 @@ function VendorPage() {
     })
 
     setSearchParams(nextParams)
+
+    if (user) {
+  try {
+    localStorage.setItem(
+      `ce-diet-${user.uid}`,
+      JSON.stringify(nextTags)
+    )
+  } catch {
+    // Filtering still works if browser storage is unavailable.
+  }
+}
   }
 
   if (loading) {

@@ -185,10 +185,10 @@ start; }
 0; }
 .form { display: flex; flex-direction: column; gap: 0.35rem; }
 .form label { font-weight: 600; font-size: 0.9rem; margin-top: 0.5rem; }
-.form input, .form select { padding: 0.5rem; border: 1px solid #c5cbd3; borderradius: 8px; font: inherit; }
+.form input, .form select { padding: 0.5rem; border: 1px solid #c5cbd3; border-radius: 8px; font: inherit; }
 .field-error { color: #b3261e; font-size: 0.85rem; margin: 0; }
 .error { border-left: 4px solid #b3261e; }
-
+    
 
 
 .dietary-filters {
@@ -244,4 +244,33 @@ start; }
 .dietary-filter-row small {
   margin-top: 3px;
   color: #5f6570;
+}
+
+.header .nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header .nav > * {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.header .nav .cart {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.header .nav > .btn {
+  color: white;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
 }
